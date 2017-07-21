@@ -1,0 +1,21 @@
+# this is a comment
+
+let x = 100
+let y = x * 2
+x = sqrt(2)
+
+proc square(side)
+    pushpos
+    repeat 4
+      fd side
+      lt 90
+    end
+    poppos
+end
+
+repeat 60
+  call square(5)
+  lt 90 + 45
+  rt 90
+  fd 100
+end

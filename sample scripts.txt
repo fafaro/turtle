@@ -1,0 +1,191 @@
+#===================================
+# Pentagon circle
+color 'red'
+repeat 10
+repeat 5
+fd 50+5
+lt 360/5+5-5
+end
+rt 360/10
+end
+hide
+#===================================
+# let usage
+let side = 100
+repeat 4
+fd side
+lt 90
+end
+
+#===================================
+# assignment test - spiral
+let side = 5
+
+pu
+rt 90
+fd 150
+lt 90
+pd
+
+repeat 5000
+fd side
+lt 2
+side = side * 0.999
+end
+
+#===================================
+# draw circle
+let radius = 100
+let numsegs = 36
+
+let theta = 360 / numsegs
+let side = 2*radius * sin(theta / 2)
+let alpha = (180-theta)/2
+
+pushpos
+
+pu
+fd radius
+lt 90 + (90-alpha)
+
+pd
+repeat numsegs
+fd side
+lt theta
+end
+
+poppos
+
+#===================================
+# draw concentric circles with proc
+
+proc circle(radius)
+let numsegs = 72
+let raddelta = 5
+
+let theta = 360 / numsegs
+let side = 2*radius * sin(theta / 2)
+let alpha = (180-theta)/2
+
+pushpos
+
+pu
+fd radius
+lt 90 + (90-alpha)
+
+pd
+repeat numsegs
+fd side
+lt theta
+end
+
+poppos
+end
+
+call circle(160)
+
+#=====================
+# rainbow circle
+
+thick 10
+repeat 36
+color 'hsl(angle)'
+pushpos
+repeat 36
+fd 3
+lt 3
+end
+poppos
+lt 10
+end
+hide
+
+#=================================
+# rotating grid of squares
+pu
+lt 180
+fd 140
+rt 90
+fd 140
+rt 90
+
+proc square(side)
+  pushpos
+  repeat 4
+  fd side
+  rt 90
+  end
+  poppos
+end
+
+let a = 0
+repeat 8
+pushpos
+repeat 8
+pd
+lt a
+call square(20)
+rt a
+a = a + 1
+pu
+fd 20+10
+end
+poppos
+rt 90
+fd 20+10
+lt 90
+end
+
+#===================================
+# another curvy rainbow circle
+thick 5
+repeat 36
+pushpos
+repeat 20
+color 'hsl(angle)'
+fd 5
+lt 9
+end
+poppos
+lt 10
+end
+
+#===================================
+# sine wave sweeped in a circle
+repeat 36
+pushpos
+let theta = 0
+color 'hsl(angle)'
+repeat 500
+fd 1
+lt 10 * cos(theta)
+theta = theta + 5
+end
+poppos
+lt 10
+end
+
+#===================================
+# Jargon - Grammar Example
+# this is a comment
+
+let x = 100
+let y = x * 2
+x = sqrt(2)
+
+proc square(side)
+    pushpos
+    repeat 4
+      fd side
+      lt 90
+    end
+    poppos
+end
+
+repeat 60
+  call square(5)
+  lt 90 + 45
+  rt 90
+  fd 100
+end
+#===================================
